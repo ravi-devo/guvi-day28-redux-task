@@ -29,8 +29,6 @@
 .product-footer{
     height: 15%;
     width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 img{

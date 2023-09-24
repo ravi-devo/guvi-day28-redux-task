@@ -2,9 +2,11 @@ import "./body.css";
 import Button from "../Button/button";
 
 const body = (props) => {
+    const { data, cartItems, addToCart, removeFromCart } = props;
+
     return (
         <main className="products">
-            {props.data.map((e) => (
+            {data.map((e, index) => (
                 <div className="product-container">
                     <div className="product-image">
                         <img src={e.url} alt="" />
@@ -15,7 +17,7 @@ const body = (props) => {
                         <p>{e.price}</p>
                     </div>
                     <div className="product-footer">
-                        <Button />
+                        <Button e = {e} cartItems = {cartItems} addToCart = {addToCart} removeFromCart = {removeFromCart} />
                     </div>
                 </div>
             ))}

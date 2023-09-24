@@ -1,21 +1,35 @@
 import "./button.css";
-let isButtonState = true;
 
-const button = () => {
-    function buttonPressed() {
-        if (isButtonState) {
-            isButtonState = false;
-            const element = document.getElementById("button-state");
-            element.innerHTML = "<button>RemoveCart</button>"
-        } else {
-            isButtonState = true;
-            const element = document.getElementById("button-state");
-            element.innerHTML = "<button>AddCart</button>"
-        }
-    }
+const button = (props) => {
+
+    const { e, cartItems, addToCart, removeFromCart } = props;
+
+    const addingItemToCart = (item) => {
+        console.log("Adding Product: ", item);
+        addToCart({ ...item, quantity: 1 });
+    };
+
+    const removingItemFromCart = (item) => {
+        removeFromCart(item);
+    };
+
     return (
-        <div id="button-state">
-            {isButtonState ? <button onClick={buttonPressed}>Add to cart</button> : <button onClick={buttonPressed}>Remove from cart</button>}
+        <div className="button-container">
+            {cartItems.some((item) => item.id === e.id) ? (
+                <div
+                    className="remove-from-cart"
+                    onClick={() => removingItemFromCart(e)}
+                >
+                    Remove from cart
+                </div>
+            ) : (
+                <div
+                    className="add-to-cart"
+                    onClick={() => addingItemToCart(e)}
+                >
+                    Add to cart
+                </div>
+            )}
         </div>
     );
 }
