@@ -19,3 +19,8 @@ p{
     display: flex;
     justify-content: space-between;
 }
+
+.link{
+    text-decoration: none;
+    color: rgb(49, 48, 48);
+}

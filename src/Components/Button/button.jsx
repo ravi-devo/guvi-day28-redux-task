@@ -1,12 +1,16 @@
 import "./button.css";
+import { AppContext } from "../../App";
+import { useContext } from "react";
 
-const button = (props) => {
+const Button = (props) => {
 
-    const { e, cartItems, addToCart, removeFromCart } = props;
+    const { product } = props;
+
+    const {addToCart, removeFromCart, cartItems} = useContext(AppContext);
 
     const addingItemToCart = (item) => {
-        console.log("Adding Product: ", item);
-        addToCart({ ...item, quantity: 1 });
+        //console.log("Adding Product: ", item);
+        addToCart({ ...item, subtotal: item.price });
     };
 
     const removingItemFromCart = (item) => {
@@ -15,17 +19,17 @@ const button = (props) => {
 
     return (
         <div className="button-container">
-            {cartItems.some((item) => item.id === e.id) ? (
+            {cartItems.some((item) => item.id === product.id) ? (
                 <div
                     className="remove-from-cart"
-                    onClick={() => removingItemFromCart(e)}
+                    onClick={() => removingItemFromCart(product)}
                 >
                     Remove from cart
                 </div>
             ) : (
                 <div
                     className="add-to-cart"
-                    onClick={() => addingItemToCart(e)}
+                    onClick={() => addingItemToCart(product)}
                 >
                     Add to cart
                 </div>
@@ -34,4 +38,4 @@ const button = (props) => {
     );
 }
 
-export default button;
+export default Button;
