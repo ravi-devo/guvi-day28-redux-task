@@ -1,7 +1,7 @@
 .item-count{
     background-color: azure;
     display: inline-block;
-    color: black;
+    color: brown;
     border-radius: 15px;
     margin-left: 5px;
     padding: 5px;
@@ -13,6 +13,8 @@ p{
 
 .cart-item{
     width: fit-content;
+    background-color: rgb(152, 36, 36);
+    color: white;
 }
 
 .nav-flex{

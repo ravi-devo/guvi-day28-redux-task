@@ -107,15 +107,17 @@ function App() {
     setCartItems((cartItems) => [...cartItems, newItem]);
   };
 
-  // const updateSubtotal = (product, count) => {
-  //   setCartItems((cartItems) => 
-  //     cartItems.map((e) => 
-  //       if(product.id === e.id){
-  //         return e.subtotal = count * e.price;
-  //       }
-  //     )
-  //   )
-  // }
+  const updateSubtotal = (product, count) => {
+    setCartItems((cartItems) =>
+      cartItems.map((e) => {
+        if (product.id === e.id) {
+          e.subtotal = count * e.price;
+        }
+        return e;
+      }
+      )
+    )
+  }
 
   const removeFromCart = (itemToBeRemoved) => {
     setCartItems((cartItems) =>
@@ -127,7 +129,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AppContext.Provider value={{ products, cartItems, addToCart, removeFromCart, cartCount }}>
+      <AppContext.Provider value={{ products, cartItems, addToCart, removeFromCart, cartCount, updateSubtotal }}>
         <div className="App">
           <Navbar />
           <Routes>

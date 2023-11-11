@@ -44,7 +44,7 @@ const NavBar = () => {
               </div>
             </li>
           </ul>
-          <div onClick={navigateToCart} className="nav-item btn btn-primary cart-item">
+          <div onClick={navigateToCart} className="nav-item btn cart-item">
             Cart
             <div className="item-count"><p>{cartCount}</p></div>
           </div>

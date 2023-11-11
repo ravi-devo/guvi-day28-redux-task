@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './cart.css';
 import { AppContext } from '../../App';
 import CartCard from '../CartCard/cartCard';
@@ -7,9 +7,17 @@ const Cart = () => {
 
     const { cartItems } = useContext(AppContext);
 
+    const [total, setTotal] = useState(0);
+
     useEffect(() => {
-        console.log("CartItems", cartItems);
-    })
+        setTotal((total) => {
+            total = 0;
+            cartItems.forEach((e) => {
+                total += e.subtotal;
+            })
+            return total;
+        });
+    }, [cartItems])
 
     return (
         <div className="container">
@@ -20,8 +28,8 @@ const Cart = () => {
                     }
                     ) : <div className='empty-cart'>Your cart is empty, Please add some to view here.</div>}
                 </div>
-                <div className="col-lg-3 totalCount card">
-                    <div>Total ({cartItems.length} CartItems): </div>
+                <div className="col-lg-3 totalCount card mb-5">
+                    <div>Total ({cartItems.length} item): ${total}</div>
                     <div className="btn buyButton">Proceed to checkout</div>
                 </div>
             </div>
