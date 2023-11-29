@@ -1,10 +1,14 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import "./navbar.css";
-import { AppContext } from "../../App";
+// import { AppContext } from "../../App";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
-  const { cartCount } = useContext(AppContext);
+  // const { cartCount } = useContext(AppContext);
+  const cartDataFromStore = useSelector((store) => store.cart);
+  const { cartItems } = cartDataFromStore;
+
   const navigate = useNavigate();
   const navigateToCart = () => {
     navigate('/cartItems');
@@ -46,7 +50,7 @@ const NavBar = () => {
           </ul>
           <div onClick={navigateToCart} className="nav-item btn cart-item">
             Cart
-            <div className="item-count"><p>{cartCount}</p></div>
+            <div className="item-count"><p>{cartItems.length}</p></div>
           </div>
         </div>
       </nav>

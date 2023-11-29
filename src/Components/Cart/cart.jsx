@@ -1,12 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './cart.css';
-import { AppContext } from '../../App';
+// import { AppContext } from '../../App';
 import CartCard from '../CartCard/cartCard';
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
 
-    const { cartItems } = useContext(AppContext);
-
+    // const { cartItems } = useContext(AppContext);
+    const cartDataFromStore = useSelector((store) => store.cart);
+    const { cartItems } = cartDataFromStore;
     const [total, setTotal] = useState(0);
 
     useEffect(() => {

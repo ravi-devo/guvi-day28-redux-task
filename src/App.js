@@ -105,9 +105,9 @@ function App() {
 
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (newItem) => {
-    setCartItems((cartItems) => [...cartItems, newItem]);
-  };
+  // const addToCart = (newItem) => {
+  //   setCartItems((cartItems) => [...cartItems, newItem]);
+  // };
 
   const updateSubtotal = (product, count) => {
     setCartItems((cartItems) =>
@@ -121,18 +121,18 @@ function App() {
     )
   }
 
-  const removeFromCart = (itemToBeRemoved) => {
-    setCartItems((cartItems) =>
-      cartItems.filter((item) => item.id !== itemToBeRemoved.id)
-    );
-  };
+  // const removeFromCart = (itemToBeRemoved) => {
+  //   setCartItems((cartItems) =>
+  //     cartItems.filter((item) => item.id !== itemToBeRemoved.id)
+  //   );
+  // };
 
   const cartCount = cartItems.length;
 
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <AppContext.Provider value={{ products, cartItems, addToCart, removeFromCart, cartCount, updateSubtotal }}>
+        <AppContext.Provider value={{ products, cartItems, cartCount, updateSubtotal }}>
           <div className="App">
             <Navbar />
             <Routes>
