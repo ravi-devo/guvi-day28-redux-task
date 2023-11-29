@@ -3,7 +3,7 @@ import Cart from './Components/Cart/cart';
 import Footer from "./Components/Footer/footer";
 import Home from "./Components/Home/home";
 import Navbar from "./Components/Navbar/navbar";
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from "react-redux";
 import store from "./Components/Store/store";
@@ -103,36 +103,10 @@ export const AppContext = createContext(null);
 
 function App() {
 
-  const [cartItems, setCartItems] = useState([]);
-
-  // const addToCart = (newItem) => {
-  //   setCartItems((cartItems) => [...cartItems, newItem]);
-  // };
-
-  const updateSubtotal = (product, count) => {
-    setCartItems((cartItems) =>
-      cartItems.map((e) => {
-        if (product.id === e.id) {
-          e.subtotal = count * e.price;
-        }
-        return e;
-      }
-      )
-    )
-  }
-
-  // const removeFromCart = (itemToBeRemoved) => {
-  //   setCartItems((cartItems) =>
-  //     cartItems.filter((item) => item.id !== itemToBeRemoved.id)
-  //   );
-  // };
-
-  const cartCount = cartItems.length;
-
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <AppContext.Provider value={{ products, cartItems, cartCount, updateSubtotal }}>
+        <AppContext.Provider value={{ products }}>
           <div className="App">
             <Navbar />
             <Routes>
