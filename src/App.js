@@ -5,6 +5,8 @@ import Home from "./Components/Home/home";
 import Navbar from "./Components/Navbar/navbar";
 import { createContext, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from "react-redux";
+import store from "./Components/Store/store";
 
 const products = [
   {
@@ -129,20 +131,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AppContext.Provider value={{ products, cartItems, addToCart, removeFromCart, cartCount, updateSubtotal }}>
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path='/' element={
-              <Home />
-            } />
-            <Route path='/cartItems' element={
-              <Cart />
-            } />
-          </Routes>
-          <Footer />
-        </div>
-      </AppContext.Provider>
+      <Provider store={store}>
+        <AppContext.Provider value={{ products, cartItems, addToCart, removeFromCart, cartCount, updateSubtotal }}>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path='/' element={
+                <Home />
+              } />
+              <Route path='/cartItems' element={
+                <Cart />
+              } />
+            </Routes>
+            <Footer />
+          </div>
+        </AppContext.Provider>
+      </Provider>
     </BrowserRouter>
 
   );

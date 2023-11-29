@@ -1,46 +1,36 @@
 import { useContext, useEffect, useState } from 'react';
 import './cartCard.css';
 import { AppContext } from '../../App';
+import { useDispatch, useSelector } from "react-redux";
+import { increaseQuantity, decreaseQuantity } from '../Store/Slices/quantitySlice';
 
 const CartCard = (props) => {
 
     const { removeFromCart, updateSubtotal } = useContext(AppContext);
     const { product } = props;
-    const [count, setCount] = useState(1);
+    // const [count, setCount] = useState(1);
     const [subtotal, setSubtotal] = useState(product.price);
 
-    function increaseQuantity() {
-        setCount((count) => count += 1);
-    }
+    const dispatch = useDispatch();
+    const quantityValue = useSelector((store) => store.count);
 
-    function decreaseQuantity() {
-        setCount((count) => count -= 1);
-    }
-
-    // const updateSubtotalValue = () => {
-    //     updateSubtotal(product, subtotal);
-    //     console.log("product in cartCard: ", product);
-    //     console.log("Subtotal in cartCard: ", subtotal);
+    // function increaseQuantity() {
+    //     setCount((count) => count += 1);
     // }
 
-    // function sendUpdateSubtotal(){
-    //     updateSubtotal(product, count)
+    // function decreaseQuantity() {
+    //     setCount((count) => count -= 1);
     // }
+
 
     const removingItemFromCart = (item) => {
         removeFromCart(item);
     };
 
     useEffect(() => {
-        setSubtotal((subtotal) => product.price * count);
-        updateSubtotal(product, count);
-    }, [count]);
-
-
-    // useEffect(() => {
-    //     updateSubtotalValue();
-        
-    // }, [subtotal])
+        setSubtotal((subtotal) => product.price * quantityValue.count);
+        updateSubtotal(product, quantityValue.count);
+    }, [quantityValue.count]);
 
     return (
         <div className="card cartCard mb-3">
@@ -55,9 +45,9 @@ const CartCard = (props) => {
                         <p>Price: ${product.price}</p>
                         <div className='quantityCount'>
                             Quantity:
-                            <button onClick={decreaseQuantity}>-</button>
-                            <span>{count}</span>
-                            <button onClick={increaseQuantity}>+</button>
+                            <button onClick={() => dispatch(decreaseQuantity())}>-</button>
+                            <span>{quantityValue.count}</span>
+                            <button onClick={() => dispatch(increaseQuantity())}>+</button>
                             <div className='cartRemove' onClick={() => removingItemFromCart(product)}>Remove</div>
                         </div>
                         <div className="subTotal">
